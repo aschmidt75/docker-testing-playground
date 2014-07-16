@@ -20,6 +20,13 @@ EOS
     s.vm.provision "shell", inline:
 	'sudo su - -c "( puppet module list | grep -q garethr-docker ) || puppet module install garethr-docker"'
 
+    # provision the node
+    s.vm.provision :puppet, :options => "--verbose" do |puppet|
+ 	puppet.manifests_path = "puppet.d/manifests"
+	puppet.module_path = "puppet.d/modules"
+        puppet.manifest_file = "default.pp"
+    end
+
     # install & run serverspec
     s.vm.provision 'shell', inline: <<EOS
 ( sudo gem list --local | grep -q serverspec ) || sudo gem install specinfra serverspec rake
