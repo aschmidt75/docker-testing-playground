@@ -16,6 +16,9 @@ test -f /var/tmp/provisioned || {
 	sudo date >> /var/tmp/provisioned
 }
 EOS
+    # install puppet module for docker
+    s.vm.provision "shell", inline:
+	'sudo su - -c "( puppet module list | grep -q garethr-docker ) || puppet module install garethr-docker"'
 
     # install & run serverspec
     s.vm.provision 'shell', inline: <<EOS
