@@ -9,10 +9,10 @@ Vagrant.configure("2") do |config|
 
     # update system
     s.vm.provision "shell", inline: <<EOS
-	[[ ! -f /var/tmp/provisioned ]] && {
-	    sudo apt-get -y update
-	    sudo date >> /var/tmp/provisioned
-	}
+test -f /var/tmp/provisioned || {
+	sudo apt-get -y update
+	sudo date >> /var/tmp/provisioned
+}
 EOS
 
   end
