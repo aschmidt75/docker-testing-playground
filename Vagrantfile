@@ -9,16 +9,9 @@ Vagrant.configure("2") do |config|
 
     s.vm.synced_folder "spec.d/", "/mnt/spec.d"
 
-    # update system
-    s.vm.provision "shell", inline: <<EOS
-test -f /var/tmp/provisioned || {
-	sudo apt-get -y update
-	sudo date >> /var/tmp/provisioned
-}
-EOS
     # install puppet module for docker
     s.vm.provision "shell", inline:
-	'sudo su - -c "( puppet module list | grep -q garethr-docker ) || puppet module install garethr-docker"'
+	    'sudo su - -c "( puppet module list | grep -q garethr-docker ) || puppet module install -v "1.1.3" garethr-docker"'
 
     # provision the node
     s.vm.provision :puppet, :options => "--verbose" do |puppet|
@@ -29,7 +22,12 @@ EOS
 
     # install & run serverspec
     s.vm.provision 'shell', inline: <<EOS
-( sudo gem list --local | grep -q serverspec ) || sudo gem install specinfra serverspec rake
+( sudo gem list --local | grep -q serverspec ) || {
+	sudo gem install rake -v '10.3.2'
+	sudo gem install rspec -v '2.99.0'
+	sudo gem install specinfra -v '1.21.0'
+	sudo gem install serverspec -v '1.10.0'
+}
 cd /mnt/spec.d
 rake spec
 
