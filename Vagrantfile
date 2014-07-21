@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
 
     # install puppet module for docker
     s.vm.provision "shell", inline:
-	    'sudo su - -c "( puppet module list | grep -q garethr-docker ) || puppet module install -v "1.1.3" garethr-docker"'
+	    'sudo su - -c "( puppet module list | grep -q garethr-docker ) || puppet module install -v 1.1.3 garethr-docker"'
 
     # provision the node
     s.vm.provision :puppet, :options => "--verbose" do |puppet|
