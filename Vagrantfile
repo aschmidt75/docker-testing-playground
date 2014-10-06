@@ -23,10 +23,10 @@ Vagrant.configure("2") do |config|
     # install & run serverspec
     s.vm.provision 'shell', inline: <<EOS
 ( sudo gem list --local | grep -q serverspec ) || {
-	sudo gem install rake -v '10.3.2'
-	sudo gem install rspec -v '2.99.0'
-	sudo gem install specinfra -v '1.21.0'
-	sudo gem install serverspec -v '1.10.0'
+	sudo gem install rake -v '10.3.2' --no-ri --no-rdoc
+	sudo gem install rspec -v '2.99.0' --no-ri --no-rdoc
+	sudo gem install specinfra -v '1.21.0' --no-ri --no-rdoc
+	sudo gem install serverspec -v '1.10.0' --no-ri --no-rdoc
 }
 cd /mnt/spec.d
 rake spec
