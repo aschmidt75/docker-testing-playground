@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
 
     # install puppet module for docker
     s.vm.provision "shell", inline:
-	    'sudo su - -c "( puppet module list | grep -q garethr-docker ) || puppet module install -v 1.1.3 garethr-docker"'
+	    'sudo su - -c "( puppet module list | grep -q garethr-docker ) || puppet module install -v 4.0.2 garethr-docker"'
 
     # provision the node
     s.vm.provision :puppet, :options => "--verbose" do |puppet|
@@ -24,9 +24,9 @@ Vagrant.configure("2") do |config|
     s.vm.provision 'shell', inline: <<EOS
 ( sudo gem list --local | grep -q serverspec ) || {
 	sudo gem install rake -v '10.3.2' --no-ri --no-rdoc
-	sudo gem install rspec -v '2.99.0' --no-ri --no-rdoc
-	sudo gem install specinfra -v '1.21.0' --no-ri --no-rdoc
-	sudo gem install serverspec -v '1.10.0' --no-ri --no-rdoc
+	sudo gem install rspec -v '3.0.0' --no-ri --no-rdoc
+	sudo gem install specinfra -v '2.31.0' --no-ri --no-rdoc
+	sudo gem install serverspec -v '2.16.0' --no-ri --no-rdoc
 }
 cd /mnt/spec.d
 rake spec
