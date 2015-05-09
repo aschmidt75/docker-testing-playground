@@ -29,7 +29,7 @@ Vagrant.configure("2") do |config|
 	sudo gem install serverspec -v '2.16.0' --no-ri --no-rdoc
 }
 cd /mnt/spec.d
-rake spec
+sudo rake spec
 
 EOS
 

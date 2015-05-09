@@ -40,18 +40,6 @@ describe 'Docker should have networking set up' do
 	describe interface 'docker0' do
 		it { should have_ipv4_address("172.17.42.1/16") }
 	end
-
-	describe iptables do
-		  it { should have_rule('-P POSTROUTING ACCEPT').
-	 		with_table('nat').
-			with_chain('POSTROUTING') 
-		  }
-		  it { should have_rule('-A POSTROUTING -s 172.17.0.0/16 ! -d 172.17.0.0/16 -j MASQUERADE').
-	 		with_table('nat').
-			with_chain('POSTROUTING') 
-		  }
-	end
-
 end
 
 describe 'Docker settings should be' do

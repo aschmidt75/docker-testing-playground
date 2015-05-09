@@ -11,7 +11,7 @@ describe 'It should have the garethr-docker module' do
 	end
 
 	describe command 'puppet module list' do
-		its(:stdout) { should match 'garethr-docker.*1\.1\.3' }
+		its(:stdout) { should match 'garethr-docker.*4\.0\.2' }
 	end
 end
 
